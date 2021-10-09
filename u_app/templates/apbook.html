@@ -1,0 +1,76 @@
+{% extends 'uheader.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href={% static "apbook/fonts/material-icon/css/material-design-iconic-font.min.css" %}>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- Main css -->
+    <link rel="stylesheet" href={% static "apbook/css/style.css" %}>
+</head>
+<body>
+{% block content %}
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <form method="POST"  class="register-form" form role="form"  action="{% url 'apbook' %}" id="register-form">
+                        {% csrf_token %}
+                        <h2>User Appointment Details </h2>
+                        {% if msg %}
+                        <center><h5 style="margin-top: -10px;margin-bottom: 10px;">{{msg}}</h5></center>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="Appointment">Appointment Date & Time :</label>
+                            <input type="date" name="apdatetime" id="birth_date">
+                        </div>
+                        <p>Choose your plan below:</p>
+                        <table class="table table-hover" border="black">
+                            <thead>
+                                <tr>
+                                    <th scope="col"> Test Title</th>
+                                    <th scope="col"> Test Descrip</th>
+                                    <th scope="col"> Test interpre</th>
+                                    <th scope="col"> Test Price</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for test in tests %}
+                                <tr> 
+                                    <td>{{test.ttitle}}</td>
+                                    <td>{{test.tdes}}</td>
+                                    <td>{{test.tinter}}</td>
+                                    <td>{{test.tprice}}</td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="{{test.ttitle}}" name="plan" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
+                                          </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="form-submit">
+                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <!-- JS -->
+    <script src={% static "apbook/vendor/jquery/jquery.min.js" %}></script>
+    <script src={% static "apbook/js/main.js" %}></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+<br>
+{% endblock %}

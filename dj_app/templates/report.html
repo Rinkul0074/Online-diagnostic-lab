@@ -1,0 +1,35 @@
+{% extends 'header.html' %}
+{% load static %}
+
+<html>
+    <head>
+        
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+            {% block content %}
+        <body>
+            <center><h1>User Test Result</h1></center>
+            <table class="table table-success">
+                {% for newuap in newusap %}
+                <thead>
+                    <tr>
+                        <th>Admin Name</th>
+                        <th>User Name</th>
+                        <th>Blood Test Result</th>
+                        <th>Urine Test Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{newuap.uid.uname}}</td>
+                        <td>{{newuap.apubook}}</td>
+                        <td>{{newuap.bresult}}</td>
+                        <td>{{newuap.uresult}}</td>
+                    </tr>                   
+                </tbody>
+                {% endfor %}
+            </table>
+        </body>
+    </head>
+</html>
+{% endblock %}

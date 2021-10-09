@@ -1,0 +1,143 @@
+{% extends 'header.html' %}
+{% load static %}
+
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+<body>
+    {% block content %}
+    <h1> New User Appointment Details </h1>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .styled-table thead  {
+            background-color: #197585;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+
+        .th-color{
+            background-color: cornflowerblue;
+            color: cornsilk;
+        }
+        .th-hedings{
+            background-color: cornflowerblue;
+            color: cornsilk;
+        }
+
+        .btn btn-secondary{
+            background-color: darkturquoise;
+            color: black;
+        }
+    </style>
+    <form method="POST"  class="register-form" form role="form"  action="{% url 'newap' %}" id="register-form">
+        {% csrf_token %}
+        <!-- <h2>User Appointment Details </h2> -->
+        {% if msg %}
+        <center><h5 style="margin-top: -10px;margin-bottom: 10px;">{{msg}}</h5></center>
+        {% endif %}
+    <table style="border:1px solid black;margin-left:auto;margin-right:auto;" class="styled-table" border="black">
+        <tbody>
+            <thead>
+                <tr>
+                    <th colspan="13" style="text-align:center" style="border: black"> Appointment User Details</th>
+                </tr>
+            </thead width="50%">
+            <tr>
+                <th class="th-hedings"  scope="col">Apbook Username</th>
+                <th class="th-hedings" scope="col">Apbook Emailid</th>
+                <th class="th-hedings" scope="col">Apbook Phoneno</th>
+                <th class="th-hedings" width =30% scope="col">Apbook Useraddress</th>
+                <th class="th-hedings" scope="col">Apbook Pincode</th>
+                <th class="th-hedings" scope="col">Apbook Birthday</th>
+                <th class="th-hedings" scope="col">Apbook gender</th>
+                <th class="th-color" scope="col">Apbook Test Title</th>
+                <th class="th-color" scope="col">Apbook Test Apdatetime</th>
+                <th class="th-color" width=60% scope="col">Range</th>
+            </tr>
+            {% for apbook in apubooks %}
+            <tr>
+                <th scope="row">{{apbook.usid.username}}</th>
+                <td>{{apbook.usid.emailid}}</td>
+                <td>{{apbook.usid.phoneno}}</td>
+                <td>{{apbook.usid.useraddress}}</td>
+                <td>{{apbook.usid.pincode}}</td>
+                <td>{{apbook.usid.birthday}}</td>
+                <td>{{apbook.usid.gender}}</td>
+                <td>{{apbook.ustest}}</td>
+                <td>{{apbook.apdatetime}}</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" style="width: 80px;" type="radio" value="{{apbook.usid.username}}" name="sam" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                        </label>
+                      </div>
+                      <br>
+                
+            </td>
+                <!-- <th colspan="1" size= "10px" style="text-align: center;"><a href="{% url 'newap' %}"><button class="btn btn-primary" type="submit">Approved</button></a> -->
+                </td>
+            </tr>        
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="width:200px; margin:0 auto;">
+      <td>
+      <div class="form-group">
+        <label for="bresult">WBC</label>  <label for="bresult">4500 - 11000 mcL</label> 
+        <input type="text" class="form-control" style="width: 90px;" name="bresult" id="usr">
+      </div>
+      <div class="form-group">
+        <label for="uresult">RBC</label>   <label for="bresult">4.7 - 6.1 mcL</label>
+        <input type="text" class="form-control" style="width: 90px;" name="uresult" id="usr">
+      </div>
+    </td>
+    <div class="form-submit">
+        <input type="submit" style="width: 80px;" value="Submit" class="submit" name="submit" id="submit" />
+    </div>
+</div>
+</form>
+</body>
+</head>
+
+</html>
+{% endblock %}
